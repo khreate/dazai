@@ -69,10 +69,11 @@ client.on('interactionCreate', async interaction => {
     const { commandName, options } = interaction
 
 	if (commandName === 'ping') {
+        const start = new Date().getTime()
 		await interaction.reply({
-            content: 'pong',
-            ephemeral: true
+            content: 'pinging...', fetchReply: true
         })
+        interaction.editReply(`:ping_pong: | ${(new Date().getTime() - start) / 1000}s response`)
 	}
     if (commandName === 'rr') {
 		await interaction.reply({
