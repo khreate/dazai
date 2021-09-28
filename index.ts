@@ -1,4 +1,4 @@
-import DiscordJS, { Intents } from 'discord.js'
+import DiscordJS, { Channel, Intents, MessageEmbed, TextChannel } from 'discord.js'
 import dotenv from 'dotenv'
 dotenv.config()
 var random = require('./functions/random')
@@ -105,15 +105,15 @@ client.on('interactionCreate', async interaction => {
             content: `the result of your roll is ${random.random(1, sides)}`,
         })
     }
-    // if (commandName === 'avatar') {
-    //     const user = options.getUser('username')
-    //     const username = interaction.user.displayAvatarURL
-    //     const avaembed = new DiscordJS.MessageEmbed()
-    //     .setAuthor('Dazai')
-    //     .setImage(username)
+    if (commandName === 'avatar') {
+        const user = options.getUser('username')
+        const username = interaction.user.displayAvatarURL()
+        const avaembed = new DiscordJS.MessageEmbed()
+        .setAuthor('Dazai')
+        .setImage(username)
 
-
-    // } 
+        await interaction.reply(username)
+    }
 })
 
 
