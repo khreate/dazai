@@ -45,6 +45,16 @@ client.on('ready', () => {
         }]
     })
     commands?.create({
+        name: 'avatar', 
+        description: 'displays the avatar of specified user',
+        options: [{
+            name: 'username',
+            description: 'username for avatar',
+            type: DiscordJS.Constants.ApplicationCommandOptionTypes.USER
+        }]
+    })
+
+    commands?.create({
         name: 'multiply',
         description: 'multiply 2 numbers',
         options: [{
@@ -93,9 +103,17 @@ client.on('interactionCreate', async interaction => {
         const sides = options.getNumber('num1')!
         await interaction.reply({
             content: `the result of your roll is ${random.random(1, sides)}`,
-            ephemeral: true
         })
     }
+    // if (commandName === 'avatar') {
+    //     const user = options.getUser('username')
+    //     const username = interaction.user.displayAvatarURL
+    //     const avaembed = new DiscordJS.MessageEmbed()
+    //     .setAuthor('Dazai')
+    //     .setImage(username)
+
+
+    // } 
 })
 
 
