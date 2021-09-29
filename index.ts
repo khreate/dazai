@@ -111,6 +111,8 @@ client.on('interactionCreate', async interaction => {
         const avaembed = new DiscordJS.MessageEmbed()
         .setAuthor('Dazai')
         .setImage(username)
+        String(username).replace('.webp', '.gif')
+        
 
         await interaction.reply(username)
     }
