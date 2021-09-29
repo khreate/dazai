@@ -107,7 +107,7 @@ client.on('interactionCreate', async interaction => {
     }
     if (commandName === 'avatar') {
         const user = options.getUser('username')
-        const username = interaction.user.displayAvatarURL()
+        const username = (user) ? user.displayAvatarURL() : interaction.user.displayAvatarURL()
         const avaembed = new DiscordJS.MessageEmbed()
         .setAuthor('Dazai')
         .setImage(username)
