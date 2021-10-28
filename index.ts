@@ -114,7 +114,6 @@ client.on('interactionCreate', async interaction => {
         
         await interaction.reply(username)
     } 
-
     
 })
 
