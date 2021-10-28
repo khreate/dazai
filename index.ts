@@ -71,7 +71,18 @@ client.on('ready', () => {
         }
         ]
     })
-})
+
+    commands?.create({
+        name: 'songrec',
+        description: 'recommends a song based on given genre',
+        options: [{
+            name: 'genre',
+            description: 'genre to recommend',
+            required: true,
+            type: DiscordJS.Constants.ApplicationCommandOptionTypes.STRING
+        }
+        ]
+    })
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
@@ -114,8 +125,17 @@ client.on('interactionCreate', async interaction => {
         
         await interaction.reply(username)
     } 
+    if (commandName === 'songrec') {
+        const genre = options.getString('genre')!
+        const song = random.song(genre)
+        await interaction.reply({
+            content: `${song}`,
+            ephemeral: true
+        })
+    }
     
 })
 
+})
 
 client.login(process.env.token)
