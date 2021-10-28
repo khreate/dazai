@@ -127,11 +127,9 @@ client.on('interactionCreate', async interaction => {
     } 
     if (commandName === 'songrec') {
         const genre = options.getString('genre')!
-        const song = random.song(genre)
-        await interaction.reply({
-            content: `${song}`,
-            ephemeral: true
-        })
+        
+        // content: `${song.title} by ${song.artist}`, ephemeral: true
+        await interaction.reply(`The genre you want a recommendation from is: ${genre}`)
     }
     
 })
