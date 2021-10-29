@@ -1,7 +1,9 @@
 import DiscordJS, { Channel, Intents, MessageEmbed, TextChannel } from 'discord.js'
 import dotenv from 'dotenv'
+import axios from 'axios'
 dotenv.config()
 var random = require('./functions/random')
+var songrec = require('./functions/songrec')
 
 const client = new DiscordJS.Client({
     intents: [
@@ -65,7 +67,7 @@ client.on('ready', () => {
         },
         {
             name: 'num2',
-            description: 'secondn number to multiply',
+            description: 'second number to multiply',
             required: true,
             type: DiscordJS.Constants.ApplicationCommandOptionTypes.NUMBER
         }
@@ -74,15 +76,28 @@ client.on('ready', () => {
 
     commands?.create({
         name: 'songrec',
-        description: 'recommends a song based on given genre',
+        description: 'recommends a song based on genre, artist, track',
         options: [{
             name: 'genre',
-            description: 'genre to recommend',
+            description: 'genre you want a rec for',
+            required: true,
+            type: DiscordJS.Constants.ApplicationCommandOptionTypes.STRING
+        },
+        {
+            name: 'artist',
+            description: 'artist you want a rec for',
+            required: true,
+            type: DiscordJS.Constants.ApplicationCommandOptionTypes.STRING
+        },
+        {
+            name: 'song',
+            description: 'song you want a rec for',
             required: true,
             type: DiscordJS.Constants.ApplicationCommandOptionTypes.STRING
         }
         ]
     })
+
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
@@ -127,9 +142,11 @@ client.on('interactionCreate', async interaction => {
     } 
     if (commandName === 'songrec') {
         const genre = options.getString('genre')!
+        const song = options.getString('song')!
+        const artist = options.getString('artist')!
         
         // content: `${song.title} by ${song.artist}`, ephemeral: true
-        await interaction.reply(`The genre you want a recommendation from is: ${genre}`)
+        await interaction.reply(`You want recommendations for: ${songrec.songrec(song, artist, genre)}`)
     }
     
 })
