@@ -76,7 +76,7 @@ client.on('ready', () => {
 
     commands?.create({
         name: 'songrec',
-        description: 'recommends a song based on genre, artist, track',
+        description: 'recommends a song based on genre, artist, song',
         options: [{
             name: 'genre',
             description: 'genre you want a rec for',
@@ -146,7 +146,7 @@ client.on('interactionCreate', async interaction => {
         const artist = options.getString('artist')!
         
         // content: `${song.title} by ${song.artist}`, ephemeral: true
-        await interaction.reply(`You want recommendations for: ${songrec.songrec(song, artist, genre)}`)
+        await interaction.reply(`Data dump incoming: \n${songrec.songrec(genre,artist,song)}`)  
     }
     
 })
