@@ -146,7 +146,7 @@ client.on('interactionCreate', async interaction => {
         const artist = options.getString('artist')!
         
         // content: `${song.title} by ${song.artist}`, ephemeral: true
-        await interaction.reply(`Data dump incoming: \n${songrec.songrec(genre,artist,song)}`)  
+        await interaction.reply(`You might like: \n${songrec.songrec(genre,artist,song)}`)  
     }
     
 })
